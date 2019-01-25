@@ -6,6 +6,7 @@ I Decided to create my version of a classic game that everybody loves and played
 
 In order to run the game , it is possible to download it, unpack the zip content on any folder and run , it is possible to clone the folder with the following command in terminal.
 
+https://jorgeferreirasilva.github.io/Space-Invaders-Project/.
 
 ## How to Play
 
