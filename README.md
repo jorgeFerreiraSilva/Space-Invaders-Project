@@ -28,3 +28,4 @@ All your files are listed in the file explorer. You can switch from one to anoth
 
 * Java Script
 * Canvas 
+* JQuery
