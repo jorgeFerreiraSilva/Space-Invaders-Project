@@ -10,7 +10,7 @@ https://jorgeferreirasilva.github.io/Space-Invaders-Project/
 
 ## How to Play
 
-<-  Move Left++
+<-  Move Left
 ->  Move Right
 Space Bar - Shot
 
