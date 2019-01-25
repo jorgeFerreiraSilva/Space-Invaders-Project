@@ -6,6 +6,7 @@ function Aliens(ctx,z) {
   this.y = 200;
   this.directionX = 1;
   this.directionY = 1;
+  this.life = 2;
 
   this.w = 70;
   this.h = this.w;

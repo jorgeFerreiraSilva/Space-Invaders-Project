@@ -3,21 +3,24 @@ function Canvas() {
   this.ctx = this.canvas.getContext("2d");
   this.ship = new Ship(this.ctx);
   this.background = new Background(this.canvas);
+  this.score = 0;
   this.shots = [];
   this.aliens = [];
   this.shotAliens = [];
-  this.gameStarted = false;
+  this.gameStarted ;
 }
 
 Canvas.prototype.startGame = function() {
   const self = this;
   this.buildAlien(this.ctx, 20);
   let iFrame = 0;
-  setInterval(() => {
+ 
+   this.gameStarted = setInterval(() => {
     self.ctx.clearRect(0, 0, 600, 750);
+    self.updateScore();
     self.draw();
     self.move();
-    if (iFrame % 40 === 0) self.moveShotAliens();
+    if (iFrame % 10 === 0) self.moveShotAliens();
     self.colisionAliensHero();
     self.colisionHeroAliens();
     iFrame += 1;
@@ -90,14 +93,25 @@ Canvas.prototype.colisionHeroAliens = function() {
           this.shots[i].y >= this.aliens[j].y &&
           this.shots[i].y <= this.aliens[j].y + 50
         ) {
-          this.aliens.splice(j, 1);
+          this.aliens[j].life -= 1;
+          if (this.aliens[j].life === 0) {
+            this.aliens.splice(j, 1);
+            this.score += 1;
+          }
           this.shots.splice(i, 1);
           j = this.aliens.length; //forca a sair do loop j pois só entra no if se um tiro acertar um alien.
         }
       }
     }
   }
+  
 };
+
+Canvas.prototype.updateScore = function() {
+    const printScore = document.getElementById('score');
+    return printScore.textContent = `0${this.score}` 
+}
+
 
 Canvas.prototype.moveAlien = function() {
   for (let i = 0; i < this.aliens.length; i += 1) {
@@ -111,6 +125,15 @@ Canvas.prototype.moveAlien = function() {
     if (this.aliens[i].y > 375) this.aliens[i].directionY = -1;
     else if (this.aliens[i].y < 80) this.aliens[i].directionY = 1; //  move os aliens dentro do canvas no eixo Y
   }
+   if (this.aliens.length === 0){
+     this.ship.y -= 10;
+     if(this.ship.y < -90){
+      clearInterval(this.gameStarted);
+      $('#win').show();
+      $('#canvas').hide();
+     } 
+
+    }
 };
 
 Canvas.prototype.moveShot = function() {
@@ -141,13 +164,30 @@ Canvas.prototype.colisionAliensHero = function() {
       
       if (
         this.shotAliens[i].x >= this.ship.x &&
-        this.shotAliens[i].x <= this.ship.x + 40  &&
+        this.shotAliens[i].x <= this.ship.x + 33  &&
         this.shotAliens[i].y >= this.ship.y &&
-        this.shotAliens[i].y <= this.ship.y + 85
+        this.shotAliens[i].y <= this.ship.y + 130
       ) {
         // console.log(this.shotAliens[i].x,this.shotAliens[i].y, this.ship.x, this.ship.y );
+        this.ship.life -= 1;
+        console.log(this.ship.life);
+        if (this.ship.life === 0 ){ 
+          clearInterval(this.gameStarted);
+          $('#canvas').hide();
+          $('#game-over').show();
+          $('.start-button.try-again').show();
+          $('.score').hide();
+          this.ship.life = 3;
+          this.score = 0;
+          
+        }
         this.shotAliens.splice(i, 1);
       }
+
+      else if(this.shotAliens[i].y > 750){
+        this.shotAliens.splice(i,1);
+      }
+    
     }
   }
 };

@@ -1,24 +1,52 @@
 
 body{
-	text-align: center;
+  margin: 0 auto;
+  text-align: center;
+  background-color: black;
 }
 
 canvas {
-
-	background-color: black;
-	
-}
-
-body button {
-  font-size: 20px;
-  background-color: purple;
-  color: red;
-  padding: 10px 20px;
-  border: 0;
-  box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  position: absolute;
-  right: 650px
   
+	background-color: black;
+  position: absolute;
+
 }
+
+h1 {
+  color: white;
+
+}
+
+  .start-button{
+    margin-top: 12%;
+    cursor: pointer;
+ }
+
+ .canvas {
+   display: flex;
+   justify-content: center;
+   
+ 
+ }
+
+ .start-button.try-again {
+   width:150px;
+   height: 150px;
+   margin: 0 auto 0 auto;
+ }
+
+ .score{
+  font-family: 'Roboto', sans-serif;
+   color: white;
+   position: absolute;
+   top: 93%;
+   left: 25%;
+ }
+h1{
+  font-size: 23px;
+}
+
+ span {
+
+ }
+

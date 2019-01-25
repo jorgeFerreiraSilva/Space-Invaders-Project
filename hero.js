@@ -4,6 +4,9 @@ function Ship(ctx) {
   this.x = 300;
   this.y = 700;
 
+  this.life = 3;
+  
+
   this.w = 37;
   this.h = 85;
 
